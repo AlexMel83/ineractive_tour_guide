@@ -50,7 +50,39 @@
               class="block p-1 hover:bg-gray-700 hover:text-primary-300 transition-colors"
               to="/page_under_construction"
             >
-              {{ $t('menu.reporting') }}
+              {{ $t('menu.mission') }}
+            </NuxtLink>
+          </li>
+          <li>
+            <NuxtLink
+              class="block p-1 hover:bg-gray-700 hover:text-primary-300 transition-colors"
+              to="/page_under_construction"
+            >
+              {{ $t('menu.history') }}
+            </NuxtLink>
+          </li>
+          <li>
+            <NuxtLink
+              class="block p-1 hover:bg-gray-700 hover:text-primary-300 transition-colors"
+              to="/page_under_construction"
+            >
+              {{ $t('menu.team') }}
+            </NuxtLink>
+          </li>
+          <li>
+            <NuxtLink
+              class="block p-1 hover:bg-gray-700 hover:text-primary-300 transition-colors"
+              to="/page_under_construction"
+            >
+              {{ $t('menu.partners') }}
+            </NuxtLink>
+          </li>
+          <li>
+            <NuxtLink
+              class="block p-1 hover:bg-gray-700 hover:text-primary-300 transition-colors"
+              to="/page_under_construction"
+            >
+              {{ $t('menu.contacts') }}
             </NuxtLink>
           </li>
         </ul>
@@ -64,14 +96,14 @@
           {{ $t('menu.blog') }}
         </NuxtLink>
       </li>
-      <!-- Resources -->
+      <!-- objects -->
       <li v-auto-animate class="relative text-sm sm:text-base lg:text-lg">
         <div class="flex">
           <NuxtLink
             class="hover:text-primary-300 p-1 inline-block transition-colors border-b-2 border-transparent hover:border-primary-300 ml-auto"
             to="/page_under_construction"
           >
-            {{ $t('menu.resources') }}
+            {{ $t('menu.objects') }}
           </NuxtLink>
           <button aria-label="submenu" class="ml-2" @click="isMenuResourcesOpen = !isMenuResourcesOpen">
             <CollapsedIcon v-if="!isMenuResourcesOpen" />
@@ -84,7 +116,7 @@
               class="block p-1 hover:bg-gray-700 hover:text-primary-300 transition-colors"
               to="/page_under_construction"
             >
-              {{ $t('menu.housing') }}
+              {{ $t('menu.routes') }}
             </NuxtLink>
           </li>
           <li>
@@ -92,7 +124,7 @@
               class="block p-1 hover:bg-gray-700 hover:text-primary-300 transition-colors"
               to="/page_under_construction"
             >
-              {{ $t('menu.employment') }}
+              {{ $t('menu.heritage') }}
             </NuxtLink>
           </li>
           <li>
@@ -100,7 +132,23 @@
               class="block p-1 hover:bg-gray-700 hover:text-primary-300 transition-colors"
               to="/page_under_construction"
             >
-              {{ $t('menu.support') }}
+              {{ $t('menu.industry') }}
+            </NuxtLink>
+          </li>
+          <li>
+            <NuxtLink
+              class="block p-1 hover:bg-gray-700 hover:text-primary-300 transition-colors"
+              to="/page_under_construction"
+            >
+              {{ $t('menu.nature') }}
+            </NuxtLink>
+          </li>
+          <li>
+            <NuxtLink
+              class="block p-1 hover:bg-gray-700 hover:text-primary-300 transition-colors"
+              to="/page_under_construction"
+            >
+              {{ $t('menu.transport') }}
             </NuxtLink>
           </li>
         </ul>
@@ -125,6 +173,22 @@
               class="block p-1 hover:bg-gray-700 hover:text-primary-300 transition-colors"
               to="/page_under_construction"
             >
+              {{ $t('menu.services') }}
+            </NuxtLink>
+          </li>
+          <li>
+            <NuxtLink
+              class="block p-1 hover:bg-gray-700 hover:text-primary-300 transition-colors"
+              to="/page_under_construction"
+            >
+              {{ $t('menu.feedback') }}
+            </NuxtLink>
+          </li>
+          <li>
+            <NuxtLink
+              class="block p-1 hover:bg-gray-700 hover:text-primary-300 transition-colors"
+              to="/page_under_construction"
+            >
               {{ $t('menu.donate') }}
             </NuxtLink>
           </li>
@@ -142,6 +206,14 @@
               to="/page_under_construction"
             >
               {{ $t('menu.newsletter') }}
+            </NuxtLink>
+          </li>
+          <li>
+            <NuxtLink
+              class="block p-1 hover:bg-gray-700 hover:text-primary-300 transition-colors"
+              to="/page_under_construction"
+            >
+              {{ $t('menu.collaboration') }}
             </NuxtLink>
           </li>
         </ul>

@@ -1,58 +1,90 @@
 <template>
   <div class="menu-group mx-auto">
-    <ul class="flex justify-around p-0 m-0 list-none">
+    <ul class="flex flex-wrap justify-around p-0 m-0 list-none">
       <li class="relative mx-1 lg:mx-2 text-sm sm:text-base lg:text-lg">
         <NuxtLink
-          class="hover:text-primary-300 p-1 inline-block transition-colors border-b-2 border-transparent hover:border-primary-300"
+          class="hover:text-primary-300 p-1 inline-block transition-colors border-b-2 border-transparent hover:border-primary-300 uppercase"
           to="/"
         >
           {{ $t('menu.home') }}
         </NuxtLink>
       </li>
       <li
-        class="relative mx-1 lg:mx-2 flex items-center group text-sm sm:text-base lg:text-lg"
+        class="relative mx-0 lg:mx-2 flex items-center group text-sm sm:text-base lg:text-lg"
         @mouseenter="isMenuAboutOpen = true"
         @mouseleave="isMenuAboutOpen = false"
       >
         <NuxtLink
-          class="hover:text-primary-300 whitespace-nowrap p-1 inline-block transition-colors border-b-2 border-transparent group-hover:border-primary-300"
+          class="hover:text-primary-300 whitespace-nowrap p-1 inline-block transition-colors border-b-2 border-transparent group-hover:border-primary-300 uppercase"
           to="/about"
         >
           {{ $t('menu.about') }}
         </NuxtLink>
         <ul
-          class="absolute z-50 right-3 top-full hidden bg-gray-800 shadow-md rounded-md p-1 group-hover:block transition-all duration-300"
+          class="absolute z-50 top-full hidden bg-gray-800 shadow-md rounded-md p-1 group-hover:block transition-all duration-300"
         >
           <li>
             <NuxtLink
-              class="block p-1 hover:bg-gray-700 hover:text-primary-300 transition-colors border-b-2 border-transparent hover:border-primary-300"
+              class="whitespace-nowrap block p-1 hover:bg-gray-700 hover:text-primary-300 transition-colors border-b-2 border-transparent hover:border-primary-300"
               to="/page_under_construction"
             >
-              {{ $t('menu.reporting') }}
+              {{ $t('menu.mission') }}
+            </NuxtLink>
+          </li>
+          <li>
+            <NuxtLink
+              class="whitespace-nowrap block p-1 hover:bg-gray-700 hover:text-primary-300 transition-colors border-b-2 border-transparent hover:border-primary-300"
+              to="/page_under_construction"
+            >
+              {{ $t('menu.history') }}
+            </NuxtLink>
+          </li>
+          <li>
+            <NuxtLink
+              class="whitespace-nowrap block p-1 hover:bg-gray-700 hover:text-primary-300 transition-colors border-b-2 border-transparent hover:border-primary-300"
+              to="/page_under_construction"
+            >
+              {{ $t('menu.team') }}
+            </NuxtLink>
+          </li>
+          <li>
+            <NuxtLink
+              class="whitespace-nowrap block p-1 hover:bg-gray-700 hover:text-primary-300 transition-colors border-b-2 border-transparent hover:border-primary-300"
+              to="/page_under_construction"
+            >
+              {{ $t('menu.partners') }}
+            </NuxtLink>
+          </li>
+          <li>
+            <NuxtLink
+              class="whitespace-nowrap block p-1 hover:bg-gray-700 hover:text-primary-300 transition-colors border-b-2 border-transparent hover:border-primary-300"
+              to="/page_under_construction"
+            >
+              {{ $t('menu.contacts') }}
             </NuxtLink>
           </li>
         </ul>
         <CollapsedIcon v-if="!isMenuAboutOpen" />
         <ExpandedIcon v-if="isMenuAboutOpen" class="text-primary-300" />
       </li>
-      <li class="relative mx-1 lg:mx-2 text-sm sm:text-base lg:text-lg">
+      <li class="relative mx-0 lg:mx-2 text-sm sm:text-base lg:text-lg">
         <NuxtLink
-          class="hover:text-primary-300 p-1 inline-block transition-colors border-b-2 border-transparent hover:border-primary-300"
+          class="hover:text-primary-300 p-1 inline-block transition-colors border-b-2 border-transparent hover:border-primary-300 uppercase"
           to="/page_under_construction"
         >
           {{ $t('menu.blog') }}
         </NuxtLink>
       </li>
       <li
-        class="relative mx-1 lg:mx-2 flex items-center group text-sm sm:text-base lg:text-lg"
+        class="relative mx-0 lg:mx-2 flex items-center group text-sm sm:text-base lg:text-lg"
         @mouseenter="isMenuResourcesOpen = true"
         @mouseleave="isMenuResourcesOpen = false"
       >
         <NuxtLink
-          class="hover:text-primary-300 p-1 inline-block transition-colors border-b-2 border-transparent group-hover:border-primary-300"
+          class="whitespace-nowrap hover:text-primary-300 p-1 inline-block transition-colors border-b-2 border-transparent group-hover:border-primary-300 uppercase"
           to="/page_under_construction"
         >
-          {{ $t('menu.resources') }}
+          {{ $t('menu.objects') }}
         </NuxtLink>
         <ul
           class="absolute z-50 left-1/2 top-full hidden bg-gray-800 shadow-md rounded-md p-1 group-hover:block transition-all duration-300 transform -translate-x-1/2"
@@ -62,7 +94,7 @@
               class="block whitespace-nowrap p-1 hover:bg-gray-700 hover:text-primary-300 transition-colors border-b-2 border-transparent hover:border-primary-300"
               to="/page_under_construction"
             >
-              {{ $t('menu.housing') }}
+              {{ $t('menu.routes') }}
             </NuxtLink>
           </li>
           <li>
@@ -70,7 +102,7 @@
               class="block whitespace-nowrap p-1 hover:bg-gray-700 hover:text-primary-300 transition-colors border-b-2 border-transparent hover:border-primary-300"
               to="/page_under_construction"
             >
-              {{ $t('menu.employment') }}
+              {{ $t('menu.heritage') }}
             </NuxtLink>
           </li>
           <li>
@@ -78,7 +110,23 @@
               class="block whitespace-nowrap p-1 hover:bg-gray-700 hover:text-primary-300 transition-colors border-b-2 border-transparent hover:border-primary-300"
               to="/page_under_construction"
             >
-              {{ $t('menu.support') }}
+              {{ $t('menu.industry') }}
+            </NuxtLink>
+          </li>
+          <li>
+            <NuxtLink
+              class="block whitespace-nowrap p-1 hover:bg-gray-700 hover:text-primary-300 transition-colors border-b-2 border-transparent hover:border-primary-300"
+              to="/page_under_construction"
+            >
+              {{ $t('menu.nature') }}
+            </NuxtLink>
+          </li>
+          <li>
+            <NuxtLink
+              class="block whitespace-nowrap p-1 hover:bg-gray-700 hover:text-primary-300 transition-colors border-b-2 border-transparent hover:border-primary-300"
+              to="/page_under_construction"
+            >
+              {{ $t('menu.transport') }}
             </NuxtLink>
           </li>
         </ul>
@@ -86,12 +134,12 @@
         <ExpandedIcon v-if="isMenuResourcesOpen" class="text-primary-300" />
       </li>
       <li
-        class="relative mx-1 lg:mx-2 flex items-center group text-sm sm:text-base lg:text-lg"
+        class="relative mx-0 lg:mx-2 flex items-center group text-sm sm:text-base lg:text-lg"
         @mouseenter="isMenuJoinOpen = true"
         @mouseleave="isMenuJoinOpen = false"
       >
         <NuxtLink
-          class="hover:text-primary-300 whitespace-nowrap p-1 inline-block transition-colors border-b-2 border-transparent group-hover:border-primary-300"
+          class="hover:text-primary-300 whitespace-nowrap p-1 inline-block transition-colors border-b-2 border-transparent group-hover:border-primary-300 uppercase"
           to="/join"
         >
           {{ $t('menu.join') }}
@@ -99,6 +147,22 @@
         <ul
           class="absolute z-50 left-1/2 top-full hidden bg-gray-800 shadow-md rounded-md p-1 group-hover:block transition-all duration-300 transform -translate-x-1/2"
         >
+          <li>
+            <NuxtLink
+              class="block whitespace-nowrap p-1 hover:bg-gray-700 hover:text-primary-300 transition-colors border-b-2 border-transparent hover:border-primary-300"
+              to="/page_under_construction"
+            >
+              {{ $t('menu.services') }}
+            </NuxtLink>
+          </li>
+          <li>
+            <NuxtLink
+              class="block whitespace-nowrap p-1 hover:bg-gray-700 hover:text-primary-300 transition-colors border-b-2 border-transparent hover:border-primary-300"
+              to="/page_under_construction"
+            >
+              {{ $t('menu.feedback') }}
+            </NuxtLink>
+          </li>
           <li>
             <NuxtLink
               class="block whitespace-nowrap p-1 hover:bg-gray-700 hover:text-primary-300 transition-colors border-b-2 border-transparent hover:border-primary-300"
@@ -121,6 +185,14 @@
               to="/page_under_construction"
             >
               {{ $t('menu.newsletter') }}
+            </NuxtLink>
+          </li>
+          <li>
+            <NuxtLink
+              class="block whitespace-nowrap p-1 hover:bg-gray-700 hover:text-primary-300 transition-colors border-b-2 border-transparent hover:border-primary-300"
+              to="/page_under_construction"
+            >
+              {{ $t('menu.collaboration') }}
             </NuxtLink>
           </li>
         </ul>

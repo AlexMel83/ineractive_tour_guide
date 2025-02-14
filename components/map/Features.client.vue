@@ -20,13 +20,7 @@
         </template>
 
         <template #trailing>
-          <UButton
-            v-show="searchQuery !== ''"
-            color="gray"
-            variant="link"
-            :padded="false"
-            @click="searchQuery = ''"
-          >
+          <UButton v-show="searchQuery !== ''" color="gray" variant="link" :padded="false" @click="searchQuery = ''">
             <icons-close-icon class="icon-class" />
           </UButton>
         </template>
@@ -55,14 +49,8 @@
           </div>
         </div>
         <!--Selected Search Result-->
-        <div
-          v-if="selectedResult"
-          class="mt-2 px-3 py-3 bg-white rounded-md relative"
-        >
-          <IconsCloseIcon
-            class="size-5 absolute top-2 right-2 cursor-pointer"
-            @click="removeResult"
-          />
+        <div v-if="selectedResult" class="mt-2 px-3 py-3 bg-white rounded-md relative">
+          <IconsCloseIcon class="size-5 absolute top-2 right-2 cursor-pointer" @click="removeResult" />
           <h1 class="text-lg">
             {{ selectedResult.text }}
           </h1>
@@ -119,13 +107,7 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits([
-  'toggleSearchResults',
-  'getGeoLocation',
-  'selectedResult',
-  'plotResult',
-  'removeResult',
-]);
+const emit = defineEmits(['toggleSearchResults', 'getGeoLocation', 'selectedResult', 'plotResult', 'removeResult']);
 
 const searchQuery = ref(null);
 const searchData = ref(null);
@@ -145,15 +127,11 @@ const search = () => {
         fuzzyMatch: true,
         language: 'uk',
         limit: 10,
-        proximity: props.coords
-          ? `${props.coords.lng},${props.coords.lat}`
-          : '0,0',
+        proximity: props.coords ? `${props.coords.lng},${props.coords.lat}` : '0,0',
       });
       console.log(apiBase);
       try {
-        const { data } = await axios.get(
-          `${apiBase}/geosearch/${searchQuery.value}?${params}`,
-        );
+        const { data } = await axios.get(`${apiBase}/geosearch/${searchQuery.value}?${params}`);
 
         searchData.value = data.features;
       } catch (error) {

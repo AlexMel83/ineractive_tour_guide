@@ -14,10 +14,7 @@
           :key="panorama.id"
           class="bg-white dark:bg-slate-800 shadow-md rounded-lg"
         >
-          <nuxt-link
-            class="container rounded-lg"
-            :to="'/panoramas/' + panorama.id"
-          >
+          <nuxt-link class="container rounded-lg" :to="'/panoramas/' + panorama.id">
             <div class="photo rounded-t-lg">
               <img
                 v-if="panorama.thumbnail_url"
@@ -25,24 +22,14 @@
                 loading="lazy"
                 :alt="panorama.title"
               />
-              <img
-                v-else
-                :src="
-                  isDocker
-                    ? 'default-image.jpg'
-                    : './../public/' + 'default-image.jpg'
-                "
-              />
+              <img v-else :src="isDocker ? 'default-image.jpg' : './../public/' + 'default-image.jpg'" />
               <div class="title">
                 <h2 class="text-sm md:text-base lg:text-lg">
                   {{ panorama.title }}
                 </h2>
               </div>
             </div>
-            <div
-              v-auto-animate
-              class="info-card dark:bg-slate-600 rounded-b-lg"
-            >
+            <div v-auto-animate class="info-card dark:bg-slate-600 rounded-b-lg">
               <div v-if="panorama.description" class="description-container">
                 <p class="description">
                   {{ panorama.description }}
@@ -51,10 +38,7 @@
               <div v-if="panorama.address" class="map" @click.stop>
                 <a
                   class="dark:text-white flex flex-row items-center mb-1"
-                  :href="
-                    'https://maps.google.com/?q=' +
-                    encodeURIComponent(panorama.address)
-                  "
+                  :href="'https://maps.google.com/?q=' + encodeURIComponent(panorama.address)"
                   target="_blank"
                 >
                   <IconsGeoPin class="size-6 text-white text-[25px]" />
@@ -65,24 +49,12 @@
                 <div class="time dark:text-white">
                   <IconsClock />
                   <div flex>
-                    {{
-                      $t('Panoramas.created') +
-                      ' ' +
-                      formatDate(panorama.created_at)
-                    }}
+                    {{ $t('Panoramas.created') + ' ' + formatDate(panorama.created_at) }}
                     <div v-if="panorama.updated_at !== panorama.created_at">
-                      {{
-                        $t('Panoramas.updated') +
-                        ' ' +
-                        formatDate(panorama.updated_at)
-                      }}
+                      {{ $t('Panoramas.updated') + ' ' + formatDate(panorama.updated_at) }}
                     </div>
                     <div v-if="panorama.shooting_date">
-                      {{
-                        $t('Panoramas.shootingDate') +
-                        ' ' +
-                        formatDate(panorama.shooting_date)
-                      }}
+                      {{ $t('Panoramas.shootingDate') + ' ' + formatDate(panorama.shooting_date) }}
                     </div>
                   </div>
                 </div>
@@ -176,9 +148,7 @@ const filteredPanoramas = computed(() => {
   const startIndex = (currentPage.value - 1) * perPage.value;
   const endIndex = startIndex + perPage.value;
   return props.panoramas
-    .filter((panorama) =>
-      panorama.title.toLowerCase().includes(lowerCaseSearchTerm),
-    )
+    .filter((panorama) => panorama.title.toLowerCase().includes(lowerCaseSearchTerm))
     .slice(startIndex, endIndex);
 });
 
@@ -191,9 +161,7 @@ const toggleAccordion = () => {
 };
 
 const isFirstPage = computed(() => currentPage.value === 1);
-const isLastPage = computed(
-  () => currentPage.value === Math.ceil(props.panoramas.length / perPage.value),
-);
+const isLastPage = computed(() => currentPage.value === Math.ceil(props.panoramas.length / perPage.value));
 </script>
 
 <style scoped>

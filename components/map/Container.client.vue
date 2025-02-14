@@ -98,8 +98,8 @@ const geoError = ref(null);
 const coords = ref(null);
 const map = ref(null);
 
-const baseURL =
-  store.baseURL === 'https://apidevtour.starkon.pp.ua' ? 'https://devtour.starkon.pp.ua' : 'https://tour.starkon.pp.ua';
+// const baseURL =
+//   store.baseURL === 'https://apidevtour.starkon.pp.ua' ? 'https://devtour.starkon.pp.ua' : 'https://tour.starkon.pp.ua';
 
 const createPanoramaIcon = () => {
   return L.divIcon({

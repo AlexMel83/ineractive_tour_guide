@@ -14,52 +14,25 @@
     </p>
 
     <div v-if="editMode" class="mt-4">
-      <h2 class="text-center text-xl mb-2">
-        {{ $t('Callback.askForData1') }} <br />{{ $t('Callback.askForData2') }}
-      </h2>
+      <h2 class="text-center text-xl mb-2">{{ $t('Callback.askForData1') }} <br />{{ $t('Callback.askForData2') }}</h2>
       <form class="w-1/2 mx-auto mb-2" @submit.prevent="updateUser">
         <div class="mb-2">
           <label for="name" class="block">{{ $t('Callback.name') }}</label>
-          <input
-            id="name"
-            v-model="name"
-            type="text"
-            class="border rounded px-2 py-1 w-full"
-          />
+          <input id="name" v-model="name" type="text" class="border rounded px-2 py-1 w-full" />
         </div>
         <div class="mb-2">
-          <label for="surname" class="block">{{
-            $t('Callback.surname')
-          }}</label>
-          <input
-            id="surname"
-            v-model="surname"
-            type="text"
-            class="border rounded px-2 py-1 w-full"
-          />
+          <label for="surname" class="block">{{ $t('Callback.surname') }}</label>
+          <input id="surname" v-model="surname" type="text" class="border rounded px-2 py-1 w-full" />
         </div>
         <div class="mb-2">
           <label for="phone" class="block">{{ $t('Callback.phone') }}</label>
-          <input
-            id="phone"
-            v-model="phone"
-            type="text"
-            class="border rounded px-2 py-1 w-full"
-          />
+          <input id="phone" v-model="phone" type="text" class="border rounded px-2 py-1 w-full" />
         </div>
         <div class="mb-2">
           <label for="picture" class="block">{{ $t('Callback.photo') }}</label>
-          <input
-            id="picture"
-            v-model="picture"
-            type="text"
-            class="border rounded px-2 py-1 w-full"
-          />
+          <input id="picture" v-model="picture" type="text" class="border rounded px-2 py-1 w-full" />
         </div>
-        <button
-          type="submit"
-          class="bg-blue-500 text-white px-4 py-2 rounded mt-2"
-        >
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded mt-2">
           {{ $t('Callback.save') }}
         </button>
       </form>
@@ -94,11 +67,7 @@ onMounted(async () => {
   try {
     const uuid = route.params.uuid;
     const response = await $api.auth.getAuthUser(uuid);
-    if (
-      response &&
-      [200, 201].includes(response.status) &&
-      ![400, 401, 403, 404, 500].includes(response.data.status)
-    ) {
+    if (response && [200, 201].includes(response.status) && ![400, 401, 403, 404, 500].includes(response.data.status)) {
       const data = response.data;
       appStore.saveUserData(data);
       success.value = true;
@@ -152,9 +121,7 @@ const updateUser = async () => {
       setTimeout(() => router.push('/'), 3000);
     }
   } catch (err) {
-    error.value =
-      'Помилка оновлення: ' +
-      (err.response?.data?.message || 'Невідома помилка.');
+    error.value = 'Помилка оновлення: ' + (err.response?.data?.message || 'Невідома помилка.');
     setTimeout(() => router.push('/'), 3000);
   }
 };

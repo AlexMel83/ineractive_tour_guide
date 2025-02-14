@@ -71,7 +71,7 @@
           </h2>
           <p class="mb-4">
             {{ $t('PrivacyPolicy.contactsDescription')
-            }}<a href="mailto:admin@memory.pp.ua" class="text-blue-600 hover:text-blue-800">admin@memory.pp.ua</a>
+            }}<a href="mailto:it@starkon.pp.ua" class="text-blue-600 hover:text-blue-800">it@starkon.pp.ua</a>
           </p>
         </div>
       </div>

@@ -31,8 +31,8 @@
       </ul>
       <p class="mt-2 text-lg">
         {{ $t('HowToHelp.ifYouStarterText') }}
-        <a href="mailto:admin@memory.pp.ua" target="_blank" class="text-blue-600 hover:text-blue-800">
-          admin@memory.pp.ua
+        <a href="mailto:it@starkon.pp.ua" target="_blank" class="text-blue-600 hover:text-blue-800">
+          it@starkon.pp.ua
         </a>
         {{ $t('HowToHelp.ifYouStarterAfterLink') }}
       </p>
@@ -53,7 +53,7 @@
       </h3>
       <p class="mt-2 text-lg">
         {{ $t('HowToHelp.joinDescriptionText')
-        }}<a href="mailto:admin@memory.pp.ua" _blank class="text-blue-600 hover:text-blue-800">admin@memory.pp.ua</a
+        }}<a href="mailto:it@starkon.pp.ua" _blank class="text-blue-600 hover:text-blue-800">it@starkon.pp.ua</a
         >{{ $t('HowToHelp.joinDescriptionAfterLink') }}
       </p>
 

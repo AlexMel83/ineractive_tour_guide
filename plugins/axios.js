@@ -7,7 +7,7 @@ export default defineNuxtPlugin((nuxtApp) => {
   const authStore = useAuthStore();
   let baseURL;
   if (process.client) {
-    if (window.location.hostname === 'memory.pp.ua') {
+    if (window.location.hostname === 'tour.starkon.pp.ua') {
       baseURL = 'https://api.' + window.location.hostname;
     } else {
       baseURL = config.public.apiBase || 'http://localhost:4040';

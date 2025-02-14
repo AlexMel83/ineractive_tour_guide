@@ -6,7 +6,8 @@ export default defineI18nConfig(() => ({
       header: {
         enter: 'Enter',
         title: 'Interactive tourist guide of Khmelnytskyi',
-        // subtitle: 'Starokostyantiniv',
+        subtitle:
+          'This project is created to popularize tourist objects and cultural heritage of Khmelnytskyi region and integrate them with local services and transport infrastructure.',
         autorization_close: 'Close autorization form',
       },
       menu: {
@@ -40,8 +41,38 @@ export default defineI18nConfig(() => ({
       SearchInput: {
         placeholder: 'Search by name',
       },
+      Map: {
+        expandMap: 'Expand map',
+        collapseMap: 'Collapse map',
+        searchPlaceholder: 'Search',
+        geoErrorTitle: 'Geolocation error',
+        geoErrorClose: 'Close',
+        panoramas: 'Panoramas',
+        memories: 'Memories',
+        coordinates: 'Coordinates:',
+        latitude: 'Latitude:',
+        longitude: 'Longitude:',
+        inputTitle: 'Input title',
+        inputAddress: 'Input address',
+        address: 'Address:',
+        createPlace: 'Define place',
+      },
       ShareButtons: {
         sharedSocial: 'Sharing throug social media',
+      },
+      Panoramas: {
+        collapse: 'Collapse panoramas',
+        expand: 'Expand panoramas',
+        created: 'Created:',
+        updated: 'Updated:',
+        shootingDate: 'Date of shooting:',
+        see: 'See',
+        address: 'Address:',
+        addressNotAvailable: 'Address not available',
+        description: 'Description:',
+        back: 'Back',
+        forward: 'Forward',
+        loading: 'Loading panoramas...',
       },
       Footer: {
         social: 'Our social networks:',
@@ -217,7 +248,8 @@ export default defineI18nConfig(() => ({
       header: {
         enter: 'Увійти',
         title: 'Інтерактивний туристичний гід Хмельниччини',
-        // subtitle: 'Старокостянтинів',
+        subtitle:
+          "Цей проєкт створено для популяризації туристичних об'єктів і культурної спадщини Хмельницької області та їх інтеграції з місцевими сервісами та транспортною інфраструктурою.",
         autorization_close: 'Закрити форму авторизації',
       },
       menu: {
@@ -250,8 +282,38 @@ export default defineI18nConfig(() => ({
       SearchInput: {
         placeholder: 'Пошук по назві',
       },
+      Map: {
+        expandMap: 'Розгорнути мапу',
+        collapseMap: 'Згорнути мапу',
+        searchPlaceholder: 'Пошук',
+        geoErrorTitle: 'Помилка геолокації',
+        geoErrorClose: 'Закрити',
+        panoramas: 'Панорами',
+        memories: 'Спогади',
+        coordinates: 'Координати:',
+        latitude: 'Широта:',
+        longitude: 'Довгота:',
+        inputTitle: 'Введіть назву',
+        inputAddress: 'Введіть адресу',
+        address: 'Адреса:',
+        createPlace: 'Визначити місце',
+      },
       ShareButtons: {
         sharedSocial: 'Поділитись через соціальні мережі',
+      },
+      Panoramas: {
+        collapse: 'Згорнути панорами',
+        expand: 'Розгорнути панорами',
+        created: 'Створено:',
+        updated: 'Оновлено:',
+        shootingDate: 'Дата зйомки:',
+        see: 'Переглянути',
+        address: 'Адреса:',
+        addressNotAvailable: 'Адрес не указан',
+        description: 'Опис:',
+        back: 'Назад',
+        forward: 'Вперед',
+        loading: 'Завантаження панорами...',
       },
       Footer: {
         social: 'Наші соціальні мережі:',

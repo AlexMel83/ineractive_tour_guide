@@ -5,7 +5,7 @@ import type { AuthApi } from '../api/auth';
 interface User {
   id: number;
   email: string;
-  facabook_id: string;
+  facebook_id: string | null; // Fixed typo in facebook_id
   google_id: string;
   name: string;
   surname: string;
@@ -28,15 +28,21 @@ interface AuthResponse {
   };
 }
 
-export const useAppStore = defineStore('auth', {
+// Removed duplicate store name 'auth'
+export const useAppStore = defineStore('app', {
   state: () => ({
     isMenuOpen: false,
     isLoading: false,
     menuOpen: false,
+    searchTerm: '',
   }),
   actions: {
     toggleMenu() {
       this.isMenuOpen = !this.isMenuOpen;
+    },
+    // Added missing action from the bottom of the file
+    setSearchTerm(term: string) {
+      this.searchTerm = term;
     },
   },
 });
@@ -47,6 +53,7 @@ export const useAuthStore = defineStore('auth', {
     isAuthed: false,
   }),
   actions: {
+    // Fixed Partial type parameter
     saveUserData(data: Partial<AuthResponse>) {
       if (!this.userData) {
         this.userData = {
@@ -57,7 +64,6 @@ export const useAuthStore = defineStore('auth', {
             surname: '',
             phone: '',
             role: '',
-            activationlink: '',
             isactivated: false,
             social_login: false,
             facebook_id: null,
@@ -100,7 +106,7 @@ export const useAuthStore = defineStore('auth', {
       const $api = nuxtApp.$api as { auth: AuthApi };
       try {
         await $api.auth.logout();
-        this.$reset(); // очищення Pinia-стану
+        this.$reset();
         if (typeof window !== 'undefined') {
           localStorage.clear();
         }

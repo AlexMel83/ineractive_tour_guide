@@ -12,7 +12,7 @@
         <MagnifyingGlassIcon class="icon-class text-black dark:text-white" />
       </template>
       <template #trailing>
-        <UButton v-show="searchTerm !== ''" color="gray" variant="link" :padded="false" @click="searchTerm = ''">
+        <UButton v-show="searchTerm !== ''" color="gray" variant="link" :padded="false" @click="clearSearch">
           <CloseIcon class="icon-class" />
         </UButton>
       </template>
@@ -21,21 +21,20 @@
 </template>
 
 <script setup>
+import { useAppStore } from '~/stores/app.store';
 import MagnifyingGlassIcon from '~/components/icons/MagnifyingGlassIcon.vue';
 import CloseIcon from '~/components/icons/CloseIcon.vue';
-import debounce from 'lodash.debounce';
 
-const searchTerm = ref('');
-provide('searchTerm', searchTerm);
+const appStore = useAppStore();
 
-const bus = useNuxtApp().$bus;
+const searchTerm = computed({
+  get: () => appStore.searchTerm,
+  set: (value) => appStore.setSearchTerm(value),
+});
 
-watch(
-  searchTerm,
-  debounce((newValue) => {
-    bus.$emit('searchTermUpdated', newValue);
-  }, 500),
-);
+const clearSearch = () => {
+  searchTerm.value = '';
+};
 </script>
 
 <style scoped>

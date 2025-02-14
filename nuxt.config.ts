@@ -27,17 +27,20 @@ export default defineNuxtConfig({
   },
   plugins: [
     '~/plugins/axios.js',
+    '~/plugins/errorHandler.js',
+    '~/plugins/google-maps.js',
   ],
   build: {
     transpile: ['@nuxt/ui'], // if using Nuxt UI
   },
   devtools: { enabled: false },
-  css: ['~/assets/src/tailwind.css', '~/assets/src/styles.css'],
+  css: [  'leaflet.markercluster/dist/MarkerCluster.css','leaflet.markercluster/dist/MarkerCluster.Default.css','~/assets/src/tailwind.css', '~/assets/src/styles.css'],
   modules: [
     '@nuxt/ui',
     '@formkit/auto-animate/nuxt',
     '@nuxtjs/tailwindcss',
     '@nuxtjs/color-mode',
+    '@nuxtjs/leaflet',
     '@nuxtjs/i18n',
     '@nuxt/image',
     '@pinia/nuxt',
@@ -93,6 +96,12 @@ export default defineNuxtConfig({
       ],
       link: [
         {
+          rel: 'stylesheet',
+          href: 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css',
+          integrity: 'sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=',
+          crossorigin: '',
+        },
+        {
           rel: 'icon',
           type: 'image/png',
           href: '/icons/favicon.png',
@@ -116,6 +125,9 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
+      apiKeyMapbox: process.env.APIKEY_MAPBOX,
+      googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY,
+      gtagId: process.env.NUXT_PUBLIC_GTAG_ID || 'G-6RYNGNQ3ZB',
       apiBase: process.env.API_BASE_URL || 'https://api.memory.pp.ua',
       isDocker: process.env.NUXT_PUBLIC_IS_DOCKER || 'false',
       API_URL: process.env.API_URL,

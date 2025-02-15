@@ -9,7 +9,7 @@ export default defineNuxtConfig({
     //   process.env.NUXT_PUBLIC_IS_DOCKER === 'true'
     //     ? 'node-server'
     //     : 'cloudflare-pages',
-    preset: 'cloudflare',
+    preset: 'cloudflare-pages',
     static: process.env.NUXT_PUBLIC_IS_DOCKER === 'true' ? false : true,
     publicAssets: [
       {

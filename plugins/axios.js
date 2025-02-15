@@ -8,12 +8,13 @@ export default defineNuxtPlugin((nuxtApp) => {
   let baseURL;
   if (process.client) {
     if (window.location.hostname === 'tour.starkon.pp.ua') {
-      baseURL = 'https://api.' + window.location.hostname;
+      // baseURL = 'https://tourapi.' + window.location.hostname;
+      baseURL = config.public.apiBase || 'http://localhost:5050';
     } else {
-      baseURL = config.public.apiBase || 'http://localhost:4040';
+      baseURL = config.public.apiBase || 'http://localhost:5050';
     }
   } else {
-    baseURL = config.public.apiBase || 'http://localhost:4040';
+    baseURL = config.public.apiBase || 'http://localhost:5050';
   }
 
   const axiosInstance = axios.create({

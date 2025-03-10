@@ -42,7 +42,11 @@
         </nuxt-link>
       </div>
       <div class="mt-2 flex justify-center items-center w-full mx-auto">
-        <nuxt-link to="/" class="flex items-center justify-center gap-4 hover:underline">
+        <nuxt-link
+          to="https://it.starkon.pp.ua"
+          target="_blank"
+          class="flex items-center justify-center gap-4 hover:underline"
+        >
           <div class="inline-block relative">
             <div class="absolute inset-0 bg-white blur-sm" />
             <img
@@ -53,7 +57,7 @@
               class="relative h-auto object-contain"
             />
           </div>
-          <p class="ml-3">{{ $t('Footer.developer') }}<br />{{ $t('Footer.copyright') }}</p>
+          <p class="ml-3">{{ $t('Footer.developer') }}<br />it.starkon.pp.ua<br />{{ $t('Footer.copyright') }}</p>
         </nuxt-link>
       </div>
     </div>

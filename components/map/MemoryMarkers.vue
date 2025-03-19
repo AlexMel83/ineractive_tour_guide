@@ -1,10 +1,5 @@
 <template>
-  <l-layer-group
-    ref="memoriesGroup"
-    :visible="showMemoryMarkers"
-    layer-type="overlay"
-    :name="layerName"
-  />
+  <l-layer-group ref="memoriesGroup" :visible="showMemoryMarkers" layer-type="overlay" :name="layerName" />
 </template>
 
 <script setup>
@@ -59,10 +54,7 @@ const markerMemoryData = computed(() =>
   })),
 );
 
-const baseURL =
-  store.baseURL === 'https://apidev.memory.pp.ua'
-    ? 'https://dev.memory.pp.ua'
-    : 'https://memory.pp.ua';
+const baseURL = store.baseURL === 'https://apidev.memory.pp.ua' ? 'https://dev.memory.pp.ua' : 'https://memory.pp.ua';
 const createMemoryPopupContent = (memory) => {
   // Определение URL фото
   const photoURL = memory.memory_photos?.[0]?.url
@@ -99,10 +91,7 @@ const getYoutubeThumbnailUrl = (url) => {
     if (urlObj.hostname === 'youtu.be') {
       // Короткие ссылки, например: https://youtu.be/<video_id>
       return `https://img.youtube.com/vi/${urlObj.pathname.slice(1)}/hqdefault.jpg`;
-    } else if (
-      urlObj.hostname === 'www.youtube.com' ||
-      urlObj.hostname === 'youtube.com'
-    ) {
+    } else if (urlObj.hostname === 'www.youtube.com' || urlObj.hostname === 'youtube.com') {
       if (urlObj.pathname === '/watch') {
         // Стандартные ссылки, например: https://www.youtube.com/watch?v=<video_id>
         return `https://img.youtube.com/vi/${urlObj.searchParams.get('v')}/hqdefault.jpg`;
@@ -139,9 +128,7 @@ onMounted(() => {
   if (memoriesGroup.value?.leafletObject) {
     markerClusterGroupMemories.value = L.markerClusterGroup();
     updateMarkers();
-    memoriesGroup.value.leafletObject.addLayer(
-      markerClusterGroupMemories.value,
-    );
+    memoriesGroup.value.leafletObject.addLayer(markerClusterGroupMemories.value);
   }
 });
 

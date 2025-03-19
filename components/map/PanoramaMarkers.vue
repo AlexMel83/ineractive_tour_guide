@@ -1,10 +1,5 @@
 <template>
-  <l-layer-group
-    ref="panoramasGroup"
-    :visible="showPanoramaMarkers"
-    layer-type="overlay"
-    :name="layerName"
-  />
+  <l-layer-group ref="panoramasGroup" :visible="showPanoramaMarkers" layer-type="overlay" :name="layerName" />
 </template>
 
 <script setup>
@@ -43,12 +38,8 @@ const createSvgIcon = (color = '#0000ff') => `
 const markerPanoramaData = computed(() =>
   props.panoramas.map((panorama) => ({
     id: panorama.id,
-    latitude: panorama.latitude_fact
-      ? panorama.latitude_fact
-      : panorama.latitude,
-    longitude: panorama.longitude_fact
-      ? panorama.longitude_fact
-      : panorama.longitude,
+    latitude: panorama.latitude_fact ? panorama.latitude_fact : panorama.latitude,
+    longitude: panorama.longitude_fact ? panorama.longitude_fact : panorama.longitude,
     address: panorama.address,
     title: panorama.title,
     thumbnail_url: panorama.thumbnail_url,
@@ -56,9 +47,7 @@ const markerPanoramaData = computed(() =>
 );
 
 const createPanoramaPopupContent = (panorama) => {
-  const photoURL = panorama.thumbnail_url
-    ? panorama.thumbnail_url
-    : './default-memory.png';
+  const photoURL = panorama.thumbnail_url ? panorama.thumbnail_url : './default-memory.png';
   const address = panorama.address
     ? `<p><a href="https://www.google.com/maps?q=${encodeURIComponent(
         panorama.address,
@@ -86,9 +75,7 @@ const updateMarkers = () => {
       const marker = L.marker(
         [
           panorama.latitude_fact ? panorama.latitude_fact : panorama.latitude,
-          panorama.longitude_fact
-            ? panorama.longitude_fact
-            : panorama.longitude,
+          panorama.longitude_fact ? panorama.longitude_fact : panorama.longitude,
         ],
         { icon: createPanoramaIcon() },
       );
@@ -103,9 +90,7 @@ onMounted(() => {
   if (panoramasGroup.value?.leafletObject) {
     markerClusterGroupPanoramas.value = L.markerClusterGroup();
     updateMarkers();
-    panoramasGroup.value.leafletObject.addLayer(
-      markerClusterGroupPanoramas.value,
-    );
+    panoramasGroup.value.leafletObject.addLayer(markerClusterGroupPanoramas.value);
   }
 });
 

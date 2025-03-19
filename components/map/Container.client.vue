@@ -81,7 +81,6 @@ defineProps({
 const markerClusterGroupPanoramas = ref(null);
 const markerClusterGroupMemories = ref(null);
 const showPanoramaMarkers = ref(true);
-const showMemoryMarkers = ref(true);
 const markerCoordinates = ref({ lat: 0, lng: 0 });
 const selectedResultData = ref(null);
 const panoramasGroup = ref(null);

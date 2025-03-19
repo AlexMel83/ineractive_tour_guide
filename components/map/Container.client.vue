@@ -47,18 +47,16 @@
         :url="tileProvider.url"
         layer-type="base"
       />
-      <!-- <l-layer-group
-        ref="memoriesGroup"
-        :visible="showMemoryMarkers"
-        layer-type="overlay"
-        :name="$t('Map.memories')"
-      /> -->
-      <l-layer-group
-        ref="panoramasGroup"
-        :visible="showPanoramaMarkers"
-        layer-type="overlay"
-        :name="$t('Map.panoramas')"
+      <MapPanoramaMarkers
+        :panoramas="panoramas"
+        :show-panorama-markers="showPanoramaMarkers"
+        :layer-name="$t('Map.panoramas')"
       />
+      <!-- <MapMemoryMarkers
+        :memories="memories"
+        :show-memory-markers="showMemoryMarkers"
+        :layer-name="$t('Map.memories')"
+      /> -->
       <LControlScale position="bottomright" :imperial="false" :metric="true" />
     </LMap>
   </section>
@@ -68,26 +66,26 @@
 import { MAP_CONFIG, TILE_PROVIDERS } from '@/constants/map-config';
 import L from 'leaflet';
 import 'leaflet.markercluster';
-import 'leaflet.markercluster/dist/MarkerCluster.css';
-import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
-import { LControlLayers, LControlScale, LMap, LTileLayer, LLayerGroup } from '@vue-leaflet/vue-leaflet';
+import { LControlLayers, LControlScale, LMap, LTileLayer } from '@vue-leaflet/vue-leaflet';
 import { useAppStore } from '~/stores/app.store';
 import { useI18n } from 'vue-i18n';
 const { t } = useI18n();
 const store = useAppStore();
 
-const props = defineProps({
-  panoramas: {
-    type: Array,
-    default: () => [],
-  },
+defineProps({
+  panoramas: { type: Array, default: () => [] },
+  memories: { type: Array, default: () => [] },
+  heightClass: { type: String, default: null },
 });
 
 const markerClusterGroupPanoramas = ref(null);
+const markerClusterGroupMemories = ref(null);
 const showPanoramaMarkers = ref(true);
+const showMemoryMarkers = ref(true);
 const markerCoordinates = ref({ lat: 0, lng: 0 });
 const selectedResultData = ref(null);
 const panoramasGroup = ref(null);
+const memoriesGroup = ref(null);
 const searchResults = ref(null);
 const resultMarker = ref(null);
 const fullScreen = ref(false);
@@ -98,86 +96,15 @@ const geoError = ref(null);
 const coords = ref(null);
 const map = ref(null);
 
-// const baseURL =
-//   store.baseURL === 'https://apidevtour.starkon.pp.ua' ? 'https://devtour.starkon.pp.ua' : 'https://tour.starkon.pp.ua';
-
-const createPanoramaIcon = () => {
-  return L.divIcon({
-    html: createSvgIcon('#0000ff'),
-    className: 'custom-div-icon',
-    iconAnchor: [16, 32],
-    iconSize: [32, 32],
-  });
-};
-
-const markerPanoramaData = computed(() =>
-  props.panoramas.map((panorama) => ({
-    id: panorama.id,
-    latitude: panorama.latitude_fact ? panorama.latitude_fact : panorama.latitude,
-    longitude: panorama.longitude_fact ? panorama.longitude_fact : panorama.longitude,
-    address: panorama.address,
-    title: panorama.title,
-    thumbnail_url: panorama.thumbnail_url,
-  })),
-);
-
-const createPanoramaPopupContent = (panorama) => {
-  const photoURL = panorama.thumbnail_url ? panorama.thumbnail_url : './default-memory.png';
-  const address = panorama.address
-    ? `<p><a href="https://www.google.com/maps?q=${encodeURIComponent(
-        panorama.address,
-      )}" target="_blank">${panorama.address}</a></p>`
-    : '';
-
-  return `
-    <div class="popup-content" style="text-align: center;">
-      <a href="/panoramas/${panorama.memory_id}">
-        <b style="display: block; font-weight: bold; font-size: 130%;">${panorama.title}</b>
-      </a>
-      ${address}
-      <a href="/panoramas/${panorama.id}">
-        <img src="${photoURL}" alt="${panorama.title}" style="max-width: 100%; display: block;" />
-      </a>
-    </div>`;
-};
-
 const onMapReady = () => {
   if (!map.value?.leafletObject) return;
-
-  markerClusterGroupPanoramas.value = L.markerClusterGroup({
-    maxClusterRadius: 80, // Радиус в пикселях, в пределах которого маркеры будут объединяться
-    spiderfyOnMaxZoom: true, // Разворачивать маркеры при максимальном зуме
-    showCoverageOnHover: true, // Показывать область охвата кластера при наведении
-    zoomToBoundsOnClick: true, // Приближать к границам кластера при клике
-    animate: true, // Анимация при разворачивании/сворачивании кластера
-  });
-
-  updateMarkers();
-
+  markerClusterGroupMemories.value = L.markerClusterGroup();
+  markerClusterGroupPanoramas.value = L.markerClusterGroup();
+  if (memoriesGroup.value?.leafletObject) {
+    memoriesGroup.value.leafletObject.addLayer(markerClusterGroupMemories.value);
+  }
   if (panoramasGroup.value?.leafletObject) {
     panoramasGroup.value.leafletObject.addLayer(markerClusterGroupPanoramas.value);
-  }
-};
-
-const updateMarkers = () => {
-  if (!markerClusterGroupPanoramas.value) return;
-
-  markerClusterGroupPanoramas.value.clearLayers();
-
-  if (showPanoramaMarkers.value) {
-    markerPanoramaData.value.forEach((panorama) => {
-      const marker = L.marker(
-        [
-          panorama.latitude_fact ? panorama.latitude_fact : panorama.latitude,
-          panorama.longitude_fact ? panorama.longitude_fact : panorama.longitude,
-        ],
-        {
-          icon: createPanoramaIcon(),
-        },
-      );
-      marker.bindPopup(createPanoramaPopupContent(panorama));
-      markerClusterGroupPanoramas.value.addLayer(marker); // Изменено с addLayers на addLayer
-    });
   }
 };
 
@@ -205,23 +132,11 @@ const plotResult = (coords) => {
         lat: coords.coordinates[1].toFixed(4),
         lng: coords.coordinates[0].toFixed(4),
       }),
-      {
-        offset: [0, -20],
-      },
+      { offset: [0, -20] },
     );
     map.value.leafletObject.setView([coords.coordinates[1], coords.coordinates[0]], MAP_CONFIG.ZOOM);
     closeSearchResults();
   }
-};
-
-const createPlace = async (coords) => {
-  const payload = {
-    title: selectedResultData.value?.place_name || '',
-    address: selectedResultData.value?.place_name || '',
-    location: `POINT(${coords.lng} ${coords.lat})`,
-    user_id: store?.userData?.user?.id,
-  };
-  console.log(payload);
 };
 
 const createCustomIcon = (lat, lng) => {
@@ -239,10 +154,9 @@ const createCustomIcon = (lat, lng) => {
       lat: newLatLng.lat.toFixed(7),
       lng: newLatLng.lng.toFixed(7),
     };
-    marker.setPopupContent(createCoordinatesPopupContent(markerCoordinates.value), {
-      offset: [0, -20],
-    });
+    marker.setPopupContent(createCoordinatesPopupContent(markerCoordinates.value), { offset: [0, -20] });
   });
+
   return marker;
 };
 
@@ -252,6 +166,16 @@ const createSvgIcon = (color = '#ef4444') => `
   </svg>
 `;
 
+const createPoint = async (coords) => {
+  const payload = {
+    title: selectedResultData.value?.place_name || '',
+    address: selectedResultData.value?.place_name || '',
+    location: `POINT(${coords.lng} ${coords.lat})`,
+    user_id: store?.userData?.user?.id,
+  };
+  console.log(payload);
+};
+
 const createCoordinatesPopupContent = (coords) => {
   return `
       <div class="px-1">
@@ -260,7 +184,7 @@ const createCoordinatesPopupContent = (coords) => {
         <input class="border p-1 w-full" name="title" value="${selectedResultData.value?.place_name || ''}" placeholder="${selectedResultData.value?.place_name || t('Map.inputTitle')}" class="border p-1 w-full" />
         <label for="address">${t('Map.address')}</label>
         <input name="address" value="${selectedResultData.value?.place_name || ''}" placeholder="${selectedResultData.value?.place_name || t('Map.inputAddress')}" class="border p-1 w-full" />
-        <button type="button" @click="${createPlace(coords)}" class="bg-blue-500 text-white p-1 rounded mt-2">${t('Map.createPlace')}</button>
+        <button type="button" @click="${createPoint(coords)}" class="bg-blue-500 text-white p-1 rounded mt-2">${t('Map.createPoint')}</button>
       </div>
     `;
 };
@@ -331,19 +255,6 @@ const removeResult = () => {
 const handleSelectedResult = (result) => {
   selectedResultData.value = result;
 };
-watch(
-  () => [showPanoramaMarkers.value, props.panoramas],
-  () => {
-    updateMarkers();
-  },
-  { deep: true },
-);
-
-onMounted(() => {
-  if (map.value?.leafletObject) {
-    onMapReady();
-  }
-});
 </script>
 
 <style scoped>

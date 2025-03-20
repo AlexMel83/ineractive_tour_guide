@@ -10,10 +10,10 @@
       >
         {{ $t('header.title') }}
       </NuxtLink>
-      <HeaderMenuDesctop :activeSection="activeSection" />
-      <HeaderButtons :isMenuOpen="isMenuOpen" @toggleMenu="toggleMenu" />
+      <HeaderMenuDesctop :active-section="activeSection" />
+      <HeaderButtons :is-menu-open="isMenuOpen" @toggle-menu="toggleMenu" />
     </div>
-    <HeaderMenuMobile :isMenuOpen="isMenuOpen" @closeMenu="isMenuOpen = false" />
+    <HeaderMenuMobile :is-menu-open="isMenuOpen" @close-menu="isMenuOpen = false" />
   </nav>
 </template>
 

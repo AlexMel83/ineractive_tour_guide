@@ -21,7 +21,6 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
@@ -36,7 +35,7 @@ defineProps({
 
 const emit = defineEmits(['closeMenu']);
 
-const activeSection = ref('');
+// const activeSection = ref('');
 
 const navLinks = computed(() => [
   { id: 'home', text: t('menu.home') },

@@ -15,7 +15,7 @@
             rel="noopener noreferrer"
             class="text-custom-gray flex items-center"
           >
-            <i class="fas fa-map-marker-alt mr-2 text-custom-orange"></i>
+            <i class="fas fa-map-marker-alt mr-2 text-custom-orange" />
             {{ $t('footer.address') }}
           </NuxtLink>
           <NuxtLink
@@ -24,7 +24,7 @@
             rel="noopener noreferrer"
             class="text-custom-gray flex items-center"
           >
-            <i class="fas fa-phone mr-2 text-custom-orange"></i>
+            <i class="fas fa-phone mr-2 text-custom-orange" />
             +38 (095) 466-41-90
           </NuxtLink>
           <NuxtLink
@@ -33,7 +33,7 @@
             rel="noopener noreferrer"
             class="text-custom-gray flex items-center"
           >
-            <i class="fas fa-envelope mr-2 text-custom-orange"></i>
+            <i class="fas fa-envelope mr-2 text-custom-orange" />
             it@starkon.pp.ua
           </NuxtLink>
           <div class="flex space-x-6 mt-4">
@@ -43,7 +43,7 @@
               rel="noopener noreferrer"
               class="text-custom-gray hover:text-custom-orange transition-colors"
             >
-              <i class="fab fa-viber text-2xl"></i>
+              <i class="fab fa-viber text-2xl" />
             </NuxtLink>
             <NuxtLink
               to="https://t.me/+380954664190"
@@ -51,7 +51,7 @@
               rel="noopener noreferrer"
               class="text-custom-gray hover:text-custom-orange transition-colors"
             >
-              <i class="fab fa-telegram text-2xl"></i>
+              <i class="fab fa-telegram text-2xl" />
             </NuxtLink>
             <NuxtLink
               to="https://wa.me/380954664190"
@@ -59,7 +59,7 @@
               rel="noopener noreferrer"
               class="text-custom-gray hover:text-custom-orange transition-colors"
             >
-              <i class="fab fa-whatsapp text-2xl"></i>
+              <i class="fab fa-whatsapp text-2xl" />
             </NuxtLink>
             <NuxtLink
               to="https://m.me/380954664190"
@@ -67,13 +67,13 @@
               rel="noopener noreferrer"
               class="text-custom-gray hover:text-custom-orange transition-colors"
             >
-              <i class="fab fa-facebook-messenger text-2xl"></i>
+              <i class="fab fa-facebook-messenger text-2xl" />
             </NuxtLink>
           </div>
         </div>
 
         <div class="h-[300px] w-full">
-          <div ref="mapRef" class="w-full h-full rounded-lg border border-custom-border"></div>
+          <div ref="mapRef" class="w-full h-full rounded-lg border border-custom-border" />
         </div>
       </div>
 
@@ -84,11 +84,11 @@
       <!-- Кнопка "Наверх" -->
       <button
         v-if="showScrollTop"
-        @click="scrollToTop"
         class="fixed bottom-6 right-6 bg-custom-orange text-custom-white p-3 w-12 h-12 rounded-full shadow-lg hover:bg-custom-border hover:scale-105 transition-all duration-300 z-50"
         title="Наверх"
+        @click="scrollToTop"
       >
-        <i class="fas fa-angle-double-up"></i>
+        <i class="fas fa-angle-double-up" />
       </button>
     </div>
   </footer>

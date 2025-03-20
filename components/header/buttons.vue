@@ -14,27 +14,27 @@
           <span v-if="index < locales.length - 1" class="text-white px-1">|</span>
         </button>
         <button
-          @click="$emit('toggleMenu')"
           class="md:hidden text-custom-orange relative w-9 h-9 flex flex-col justify-center items-center gap-1 ml-5"
+          @click="$emit('toggleMenu')"
         >
           <span
             :class="[
               'block w-7 h-1 bg-custom-orange rounded transition-all duration-300',
               isMenuOpen ? 'rotate-45 translate-y-2' : '',
             ]"
-          ></span>
+          />
           <span
             :class="[
               'block w-7 h-1 bg-custom-orange rounded transition-all duration-300',
               isMenuOpen ? 'opacity-0' : 'opacity-100',
             ]"
-          ></span>
+          />
           <span
             :class="[
               'block w-7 h-1 bg-custom-orange rounded transition-all duration-300',
               isMenuOpen ? '-rotate-45 -translate-y-2' : '',
             ]"
-          ></span>
+          />
         </button>
       </div>
     </div>
@@ -46,12 +46,12 @@ import { useI18n } from 'vue-i18n';
 import { computed } from 'vue';
 import { useRouter } from 'vue-router';
 
-const props = defineProps({
-  customClass: String,
+defineProps({
+  // customClass: String,
   isMenuOpen: Boolean,
 });
 
-const emit = defineEmits(['toggleMenu']);
+defineEmits(['toggleMenu']);
 
 const router = useRouter();
 

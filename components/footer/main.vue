@@ -78,7 +78,9 @@
       </div>
 
       <div class="text-center mt-8 pt-8 border-t border-custom-border">
-        <p class="text-custom-gray">{{ $t('Footer.copyright') }}</p>
+        <p class="text-custom-gray">
+          {{ $t('Footer.copyright') }}
+        </p>
       </div>
 
       <!-- Кнопка "Наверх" -->

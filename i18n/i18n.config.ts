@@ -75,6 +75,7 @@ export default defineI18nConfig(() => ({
         loading: 'Loading panoramas...',
       },
       Footer: {
+        contacts: 'Contact Information',
         social: 'Our social networks:',
         address: 'Avdiivka city, Molodijna street, 3A',
         terms: 'Terms of use',
@@ -316,6 +317,7 @@ export default defineI18nConfig(() => ({
         loading: 'Завантаження панорами...',
       },
       Footer: {
+        contacts: 'Контактна інформація',
         social: 'Наші соціальні мережі:',
         address: 'м. Авдіївка, вул. Молодіжна, 3А',
         terms: 'Умови використання',

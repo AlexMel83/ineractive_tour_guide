@@ -9,10 +9,8 @@
     >
       <NuxtLink
         :to="`#${item.toLowerCase().replace(/\s+/g, '-')}`"
-        :class="[
-          'font-space-grotesk text-custom-black dark:text-custom-white hover:text-custom-orange transition-colors inline-flex items-center space-x-1',
-          { 'text-custom-orange': activeSection === item.toLowerCase().replace(/\s+/g, '-') },
-        ]"
+        :class="[{ 'text-custom-orange': activeSection === item.toLowerCase().replace(/\s+/g, '-') }]"
+        class="font-space-grotesk text-custom-black dark:text-custom-white hover:text-custom-orange transition-colors inline-flex items-center space-x-1"
         @click.prevent="scrollToSection(item.toLowerCase().replace(/\s+/g, '-'))"
       >
         <span>{{ item }}</span>

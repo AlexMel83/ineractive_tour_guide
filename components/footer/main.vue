@@ -7,7 +7,7 @@
           <h3
             class="text-xl font-space-grotesk mb-4 bg-gradient-to-b from-custom-gray to-custom-white text-transparent bg-clip-text"
           >
-            {{ $t('footer.contacts') }}
+            {{ $t('Footer.contacts') }}
           </h3>
           <NuxtLink
             to="https://www.google.com/maps/dir/?api=1&destination=49.738124,27.253337"
@@ -16,7 +16,7 @@
             class="text-custom-gray flex items-center"
           >
             <i class="fas fa-map-marker-alt mr-2 text-custom-orange" />
-            {{ $t('footer.address') }}
+            {{ $t('Footer.address') }}
           </NuxtLink>
           <NuxtLink
             to="tel:+380954664190"
@@ -78,7 +78,7 @@
       </div>
 
       <div class="text-center mt-8 pt-8 border-t border-custom-border">
-        <p class="text-custom-gray">© 2025 IT-Starkon. {{ $t('footer.copyright') }}</p>
+        <p class="text-custom-gray">{{ $t('Footer.copyright') }}</p>
       </div>
 
       <!-- Кнопка "Наверх" -->

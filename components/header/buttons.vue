@@ -2,35 +2,35 @@
   <div class="flex items-center space-x-4">
     <!-- Переключатель языка -->
     <button
-      @click="toggleLanguage"
       class="text-custom-black dark:text-custom-white hover:text-custom-orange dark:hover:text-custom-orange transition-colors"
+      @click="toggleLanguage"
     >
       {{ currentLocale.toUpperCase() }}
     </button>
 
     <!-- Переключатель цветовой темы -->
     <button
-      @click="appStore.toggleDarkMode"
       class="text-custom-black dark:text-custom-white hover:text-custom-orange dark:hover:text-custom-orange transition-colors"
       aria-label="Toggle dark mode"
+      @click="appStore.toggleDarkMode"
     >
       <i :class="`fas ${appStore.isDark ? 'fa-sun' : 'fa-moon'}`" />
     </button>
 
     <!-- Кнопка поиска -->
     <button
-      @click="toggleSearch"
       class="text-custom-black dark:text-custom-white hover:text-custom-orange dark:hover:text-custom-orange transition-colors"
       aria-label="Search"
+      @click="toggleSearch"
     >
       <i class="fas fa-search" />
     </button>
 
     <!-- Кнопка личного кабинета -->
     <button
-      @click="openLoginModal"
       class="text-custom-black dark:text-custom-white hover:text-custom-orange dark:hover:text-custom-orange transition-colors"
       aria-label="User cabinet"
+      @click="openLoginModal"
     >
       <i :class="`fas ${isAuthed ? 'fa-user-check' : 'fa-user'}`" />
     </button>

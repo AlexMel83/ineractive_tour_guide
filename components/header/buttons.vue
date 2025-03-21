@@ -1,76 +1,100 @@
 <template>
-  <div class="header-buttons flex items-center justify-end gap-3 md:gap-1 px-1 text-sm sm:text-base lg:text-lg flex-1">
-    <div class="languages_toggle flex md:flex-col items-start px-1">
-      <button
-        v-for="(lang, index) in locales"
-        :key="lang.code"
-        :class="{ 'text-primary-300 hover:text-primary-500': lang.code === currentLocale }"
-        class="flex items-center w-full md:border-t md:border-white first:border-t-0"
-        aria-label="chengelanguage"
-        @click="changeLanguage(lang.code)"
-      >
-        <span class="hover:scale-110">{{ lang.name }}</span>
-        <span v-if="index < locales.length - 1" class="md:hidden text-white px-1">|</span>
-      </button>
-    </div>
-    <div class="flex md:flex-col items-center gap-3 md:gap-1">
-      <HeaderColorMode />
-      <button
-        icon
-        class="search-icon"
-        aria-label="search"
-        :class="{ 'text-primary-300': isSearchVisible }"
-        @click="toggleSearch"
-      >
-        <IconsMagnifyingGlassIcon class="hover:scale-110 h-5 w-5" />
-      </button>
-    </div>
+  <div class="flex items-center space-x-4">
+    <!-- Переключатель языка -->
     <button
-      v-if="!isAuthed"
-      class="cabinet hidden md:flex text-white rounded hover:scale-110 focus:outline-none min-w-[70px] py-2"
-      aria-label="cabinet"
-      @click="openLoginModal"
+      @click="toggleLanguage"
+      class="text-custom-black dark:text-custom-white hover:text-custom-orange dark:hover:text-custom-orange transition-colors"
     >
-      <IconsUser class="mx-auto h-5 w-5" /> {{ $t('header.enter') }}
+      {{ currentLocale.toUpperCase() }}
+    </button>
+
+    <!-- Переключатель цветовой темы -->
+    <button
+      @click="appStore.toggleDarkMode"
+      class="text-custom-black dark:text-custom-white hover:text-custom-orange dark:hover:text-custom-orange transition-colors"
+      aria-label="Toggle dark mode"
+    >
+      <i :class="`fas ${appStore.isDark ? 'fa-sun' : 'fa-moon'}`" />
+    </button>
+
+    <!-- Кнопка поиска -->
+    <button
+      @click="toggleSearch"
+      class="text-custom-black dark:text-custom-white hover:text-custom-orange dark:hover:text-custom-orange transition-colors"
+      aria-label="Search"
+    >
+      <i class="fas fa-search" />
+    </button>
+
+    <!-- Кнопка личного кабинета -->
+    <button
+      @click="openLoginModal"
+      class="text-custom-black dark:text-custom-white hover:text-custom-orange dark:hover:text-custom-orange transition-colors"
+      aria-label="User cabinet"
+    >
+      <i :class="`fas ${isAuthed ? 'fa-user-check' : 'fa-user'}`" />
+    </button>
+
+    <!-- Кнопка мобильного меню -->
+    <button
+      class="md:hidden text-custom-black dark:text-custom-white hover:text-custom-orange dark:hover:text-custom-orange transition-colors"
+      @click="toggleMenu"
+    >
+      <i :class="`fas ${isMenuOpen ? 'fa-times' : 'fa-bars'}`" />
     </button>
   </div>
 </template>
 
 <script setup>
+import { onMounted } from 'vue';
+import { useAppStore } from '~/stores/app.store';
 import { useAuthStore } from '~/stores/app.store';
 import { useI18n } from 'vue-i18n';
-import { HeaderColorMode } from '#components';
+import { useRouter } from 'vue-router';
 
-const emit = defineEmits(['toggle-search', 'open-login-modal']);
-const isAuthed = computed(() => authStore.isAuthed);
+defineProps({
+  isMenuOpen: {
+    type: Boolean,
+    default: false,
+  },
+});
+
+const emit = defineEmits(['toggleMenu', 'toggle-search', 'open-login-modal']);
+
+const appStore = useAppStore();
 const authStore = useAuthStore();
+const isAuthed = computed(() => authStore.isAuthed);
+const { locale } = useI18n();
+const currentLocale = computed(() => locale.value);
 const router = useRouter();
 
-// i18n
-const { locale, locales } = useI18n();
-const currentLocale = computed(() => locale.value);
-const changeLanguage = async (langCode) => {
+// Синхронізуємо клас dark із станом isDark при завантаженні на клієнті
+onMounted(() => {
+  if (process.client) {
+    if (appStore.isDark) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }
+});
+
+const toggleLanguage = async () => {
+  const newLang = currentLocale.value === 'uk' ? 'en' : 'uk';
   try {
     const currentRoute = router.currentRoute.value;
     const newPath =
-      langCode === 'uk'
+      newLang === 'uk'
         ? currentRoute.fullPath.replace(/^\/(en|uk)/, '')
-        : `/${langCode}${currentRoute.fullPath.replace(/^\/(en|uk)/, '')}`;
-    locale.value = langCode;
+        : `/${newLang}${currentRoute.fullPath.replace(/^\/(en|uk)/, '')}`;
+    locale.value = newLang;
     await router.push(newPath);
   } catch (error) {
     console.error('Failed to change language:', error);
   }
 };
-const openLoginModal = () => {
-  emit('open-login-modal');
-};
 
-defineProps({
-  isSearchVisible: Boolean,
-});
-
-const toggleSearch = () => {
-  emit('toggle-search');
-};
+const toggleSearch = () => emit('toggle-search');
+const openLoginModal = () => emit('open-login-modal');
+const toggleMenu = () => emit('toggleMenu');
 </script>

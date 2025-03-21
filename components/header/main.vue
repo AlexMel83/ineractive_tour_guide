@@ -18,7 +18,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, nextTick } from 'vue';
+import { ref } from 'vue';
 
 const isMenuOpen = ref(false);
 const toggleMenu = () => {
@@ -37,44 +37,44 @@ const scrollToSection = (sectionId) => {
   }
 };
 
-onMounted(() => {
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          activeSection.value = entry.target.id;
-        }
-      });
-    },
-    { threshold: 0.3, rootMargin: '0px 0px -10% 0px' },
-  );
+// onMounted(() => {
+//   const observer = new IntersectionObserver(
+//     (entries) => {
+//       entries.forEach((entry) => {
+//         if (entry.isIntersecting) {
+//           activeSection.value = entry.target.id;
+//         }
+//       });
+//     },
+//     { threshold: 0.3, rootMargin: '0px 0px -10% 0px' },
+//   );
 
-  const sections = ['home', 'technologies', 'services', 'about', 'collaboration', 'contacts'];
+//   const sections = ['home', 'technologies', 'services', 'about', 'collaboration', 'contacts'];
 
-  // Ждем полной загрузки DOM
-  nextTick(() => {
-    sections.forEach((sectionId) => {
-      const element = document.getElementById(sectionId);
-      if (element) {
-        observer.observe(element);
-      } else {
-        console.warn(`Section "${sectionId}" not found in DOM on initial mount`);
-      }
-    });
+//   // Ждем полной загрузки DOM
+//   nextTick(() => {
+//     sections.forEach((sectionId) => {
+//       const element = document.getElementById(sectionId);
+//       if (element) {
+//         observer.observe(element);
+//       } else {
+//         console.warn(`Section "${sectionId}" not found in DOM on initial mount`);
+//       }
+//     });
 
-    // Дополнительная проверка через 1 секунду для асинхронных компонентов
-    setTimeout(() => {
-      sections.forEach((sectionId) => {
-        const element = document.getElementById(sectionId);
-        if (element && !observer.takeRecords().some((entry) => entry.target.id === sectionId)) {
-          observer.observe(element);
-        }
-      });
-    }, 1000);
-  });
+//     // Дополнительная проверка через 1 секунду для асинхронных компонентов
+//     setTimeout(() => {
+//       sections.forEach((sectionId) => {
+//         const element = document.getElementById(sectionId);
+//         if (element && !observer.takeRecords().some((entry) => entry.target.id === sectionId)) {
+//           observer.observe(element);
+//         }
+//       });
+//     }, 1000);
+//   });
 
-  onUnmounted(() => {
-    observer.disconnect();
-  });
-});
+//   onUnmounted(() => {
+//     observer.disconnect();
+//   });
+// });
 </script>

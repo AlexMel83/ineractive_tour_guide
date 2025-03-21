@@ -1,5 +1,5 @@
 <template>
-  <div class="hidden md:flex items-center space-x-6 flex-1 justify-center">
+  <div class="hidden md:flex space-x-6 items-center flex-1 justify-center">
     <div
       v-for="(subItems, item) in menuItems"
       :key="item"
@@ -10,7 +10,7 @@
       <NuxtLink
         :to="`#${item.toLowerCase().replace(/\s+/g, '-')}`"
         :class="[{ 'text-custom-orange': activeSection === item.toLowerCase().replace(/\s+/g, '-') }]"
-        class="font-space-grotesk text-custom-black dark:text-custom-white hover:text-custom-orange transition-colors inline-flex items-center space-x-1"
+        class="font-space-grotesk text-custom-black dark:text-custom-white hover:text-custom-orange dark:hover:text-custom-orange transition-colors inline-flex items-center space-x-1"
         @click.prevent="scrollToSection(item.toLowerCase().replace(/\s+/g, '-'))"
       >
         <span>{{ item }}</span>
@@ -31,7 +31,7 @@
           v-for="subItem in subItems"
           :key="subItem"
           :to="`#${subItem.toLowerCase().replace(/\s+/g, '-')}`"
-          class="block w-full text-left px-4 py-2 text-sm text-custom-black dark:text-custom-white hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-custom-orange transition-colors duration-200"
+          class="block w-full text-left px-4 py-2 text-sm text-custom-black dark:text-custom-white hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-custom-orange dark:hover:text-custom-orange transition-colors duration-200"
           @click.prevent="scrollToSection(subItem.toLowerCase().replace(/\s+/g, '-'))"
         >
           {{ subItem }}

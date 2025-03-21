@@ -1,11 +1,12 @@
 import { defineStore } from 'pinia';
 import { useNuxtApp } from 'nuxt/app';
 import type { AuthApi } from '../api/auth';
+import { useCookie } from '#app';
 
 interface User {
   id: number;
   email: string;
-  facebook_id: string | null; // Fixed typo in facebook_id
+  facebook_id: string | null;
   google_id: string;
   name: string;
   surname: string;
@@ -28,21 +29,37 @@ interface AuthResponse {
   };
 }
 
-// Removed duplicate store name 'auth'
 export const useAppStore = defineStore('app', {
-  state: () => ({
-    isMenuOpen: false,
-    isLoading: false,
-    menuOpen: false,
-    searchTerm: '',
-  }),
+  state: () => {
+    const themeCookie = useCookie('theme', { default: () => 'light' }); // Кукі за замовчуванням 'light'
+    const isDark = themeCookie.value === 'dark';
+
+    return {
+      isMenuOpen: false,
+      isLoading: false,
+      menuOpen: false,
+      searchTerm: '',
+      isDark, // Початкове значення береться з cookie
+    };
+  },
   actions: {
     toggleMenu() {
       this.isMenuOpen = !this.isMenuOpen;
     },
-    // Added missing action from the bottom of the file
     setSearchTerm(term: string) {
       this.searchTerm = term;
+    },
+    toggleDarkMode() {
+      this.isDark = !this.isDark;
+      const themeCookie = useCookie('theme');
+      themeCookie.value = this.isDark ? 'dark' : 'light'; // Оновлюємо кукі
+      if (process.client) {
+        if (this.isDark) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      }
     },
   },
 });
@@ -53,7 +70,6 @@ export const useAuthStore = defineStore('auth', {
     isAuthed: false,
   }),
   actions: {
-    // Fixed Partial type parameter
     saveUserData(data: Partial<AuthResponse>) {
       if (!this.userData) {
         this.userData = {

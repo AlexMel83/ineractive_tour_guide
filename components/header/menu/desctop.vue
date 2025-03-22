@@ -43,6 +43,7 @@
 
 <script setup>
 import { ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 defineProps({
   activeSection: {
@@ -51,29 +52,31 @@ defineProps({
   },
 });
 
+const { t } = useI18n();
+
 const hoveredMenu = ref(null);
 let timeoutId = null;
 
-const menuItems = {
-  Головна: [],
-  'Про нас': ['Місія та візія', 'Історія проекту', 'Команда', 'Партнери', 'Контакти'],
-  Блог: [],
-  "Туристичні об'єкти": [
-    'Туристичні маршрути',
-    'Культурна спадщина',
-    'Креативна індустрія',
-    "Природні пам'ятки",
-    'Громадський транспорт',
+const menuItems = computed(() => ({
+  [t('menu.home')]: [],
+  [t('menu.about')]: [t('menu.mission'), t('menu.history'), t('menu.team'), t('menu.partners'), t('menu.contacts')],
+  [t('menu.blog')]: [],
+  [t('menu.objects')]: [
+    t('menu.routes'),
+    t('menu.heritage'),
+    t('menu.industry'),
+    t('menu.nature'),
+    t('menu.transport'),
   ],
-  Долучитись: [
-    'Створити сторінку своїх сервісів',
-    'Залишити відгуки та пропозиції',
-    'Зробити пожертву',
-    'Стати волонтером',
-    'Підписатись',
-    'Співпраця з нами',
+  [t('menu.join')]: [
+    t('menu.services'),
+    t('menu.feedback'),
+    t('menu.donate'),
+    t('menu.volunteer'),
+    t('menu.newsletter'),
+    t('menu.collaboration'),
   ],
-};
+}));
 
 const scrollToSection = (sectionId) => {
   const element = document.getElementById(sectionId);

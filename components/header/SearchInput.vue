@@ -5,7 +5,7 @@
       name="searchTerm"
       :placeholder="$t('SearchInput.placeholder')"
       autocomplete="off"
-      class="custom-search-input"
+      class="custom-search-input mt-2"
       :ui="{ icon: { trailing: { pointer: '' } } }"
     >
       <template #leading>

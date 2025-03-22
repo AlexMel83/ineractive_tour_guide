@@ -5,7 +5,7 @@
       class="text-custom-black dark:text-custom-white hover:text-custom-orange dark:hover:text-custom-orange transition-colors"
       @click="toggleLanguage"
     >
-      {{ currentLocale.toUpperCase() }}
+      {{ currentLocale.toUpperCase() === 'UK' ? 'ENG' : 'UKR' }}
     </button>
 
     <!-- Переключатель цветовой темы -->
@@ -19,7 +19,12 @@
 
     <!-- Кнопка поиска -->
     <button
-      class="text-custom-black dark:text-custom-white hover:text-custom-orange dark:hover:text-custom-orange transition-colors"
+      class="transition-colors"
+      :class="{
+        'text-custom-orange': localSearchVisible,
+        'text-custom-black dark:text-custom-white hover:text-custom-orange dark:hover:text-custom-orange':
+          !localSearchVisible,
+      }"
       aria-label="Search"
       @click="toggleSearch"
     >
@@ -37,7 +42,11 @@
 
     <!-- Кнопка мобильного меню -->
     <button
-      class="md:hidden text-custom-black dark:text-custom-white hover:text-custom-orange dark:hover:text-custom-orange transition-colors"
+      class="md:hidden transition-colors"
+      :class="{
+        'text-custom-orange': isMenuOpen,
+        'text-custom-black dark:text-custom-white hover:text-custom-orange dark:hover:text-custom-orange': !isMenuOpen,
+      }"
       @click="toggleMenu"
     >
       <i :class="`fas ${isMenuOpen ? 'fa-times' : 'fa-bars'}`" />
@@ -52,7 +61,7 @@ import { useAuthStore } from '~/stores/app.store';
 import { useI18n } from 'vue-i18n';
 import { useRouter } from 'vue-router';
 
-defineProps({
+const props = defineProps({
   isMenuOpen: {
     type: Boolean,
     default: false,
@@ -68,6 +77,11 @@ const isAuthed = computed(() => authStore.isAuthed);
 const { locale } = useI18n();
 const currentLocale = computed(() => locale.value);
 const router = useRouter();
+const localSearchVisible = ref(props.isSearchVisible);
+
+watchEffect(() => {
+  localSearchVisible.value = props.isSearchVisible;
+});
 
 // Синхронізуємо клас dark із станом isDark при завантаженні на клієнті
 onMounted(() => {
@@ -96,7 +110,8 @@ const toggleLanguage = async () => {
 };
 
 const toggleSearch = () => {
-  emit('toggle-search');
+  localSearchVisible.value = !localSearchVisible.value;
+  emit('toggle-search', localSearchVisible.value);
 };
 const openLoginModal = () => emit('open-login-modal');
 const toggleMenu = () => emit('toggleMenu');

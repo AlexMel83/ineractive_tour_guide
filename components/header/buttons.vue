@@ -57,6 +57,7 @@ defineProps({
     type: Boolean,
     default: false,
   },
+  isSearchVisible: Boolean,
 });
 
 const emit = defineEmits(['toggleMenu', 'toggle-search', 'open-login-modal']);
@@ -94,7 +95,9 @@ const toggleLanguage = async () => {
   }
 };
 
-const toggleSearch = () => emit('toggle-search');
+const toggleSearch = () => {
+  emit('toggle-search');
+};
 const openLoginModal = () => emit('open-login-modal');
 const toggleMenu = () => emit('toggleMenu');
 </script>

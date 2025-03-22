@@ -11,9 +11,15 @@
         {{ $t('header.title') }}
       </NuxtLink>
       <HeaderMenuDesctop :active-section="activeSection" />
-      <HeaderButtons :is-menu-open="isMenuOpen" @toggle-menu="toggleMenu" />
+      <HeaderButtons :is-menu-open="isMenuOpen" @toggle-menu="toggleMenu" @toggle-search="toggleSearch" />
     </div>
     <HeaderMenuMobile :is-menu-open="isMenuOpen" @close-menu="isMenuOpen = false" />
+    <div>
+      <ModalLoginRegistration ref="loginRegistrationRef" @modal-closed="handleModalClosed" />
+    </div>
+    <div v-if="isSearchVisible" class="search-container">
+      <HeaderSearchInput />
+    </div>
   </nav>
 </template>
 
@@ -21,8 +27,16 @@
 import { ref } from 'vue';
 
 const isMenuOpen = ref(false);
+const isSearchVisible = ref(false);
+const menuOpen = ref(false);
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value;
+};
+const toggleSearch = () => {
+  isSearchVisible.value = !isSearchVisible.value;
+};
+const handleModalClosed = () => {
+  menuOpen.value = false;
 };
 
 const activeSection = ref('');

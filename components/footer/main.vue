@@ -5,46 +5,60 @@
     class="bg-white dark:bg-custom-black dark:text-custom-white py-8 border-t dark:border-gray-700 border-custom-border relative"
   >
     <div class="container mx-auto px-4">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div class="space-y-4">
+      <div class="grid grid-cols-1 md:grid-cols-2">
+        <div>
           <h3
-            class="text-xl font-space-grotesk mb-4 dark:bg-gradient-to-b dark:from-custom-gray dark:to-custom-white dark:text-transparent bg-clip-text"
+            class="text-xl font-space-grotesk mb-6 dark:bg-gradient-to-b dark:from-custom-gray dark:to-custom-white dark:text-transparent bg-clip-text"
           >
             {{ $t('Footer.contacts') }}
           </h3>
-          <NuxtLink
-            to="https://www.google.com/maps/dir/?api=1&destination=49.738124,27.253337"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="dark:text-custom-gray flex items-center"
-          >
-            <i class="fas fa-map-marker-alt mr-2 text-custom-orange" />
-            {{ $t('Footer.address') }}
-          </NuxtLink>
-          <NuxtLink
-            to="tel:+380954664190"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="dark:text-custom-gray flex items-center"
-          >
-            <i class="fas fa-phone mr-2 text-custom-orange" />
-            +38 (095) 466-41-90
-          </NuxtLink>
-          <NuxtLink
-            to="mailto:it@starkon.pp.ua"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="dark:text-custom-gray flex items-center"
-          >
-            <i class="fas fa-envelope mr-2 text-custom-orange" />
-            it@starkon.pp.ua
-          </NuxtLink>
-          <div class="flex space-x-6 mt-4">
+          <div class="flex flex-col gap-3">
+            <NuxtLink
+              to="https://www.google.com/maps/dir/?api=1&destination=49.738124,27.253337"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-fit inline-flex dark:text-custom-gray hover:text-custom-orange dark:hover:text-custom-orange transition-colors items-center"
+            >
+              <i class="fas fa-map-marker-alt mr-2 text-custom-orange" />
+              {{ $t('Footer.address') }}
+            </NuxtLink>
+
+            <NuxtLink
+              to="https://it.starkon.pp.ua"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-fit inline-flex dark:text-custom-gray hover:text-custom-orange dark:hover:text-custom-orange transition-colors items-center"
+            >
+              <i class="fas fa-globe mr-2 text-custom-orange" />
+              https://it.starkon.pp.ua
+            </NuxtLink>
+
+            <NuxtLink
+              to="mailto:it@starkon.pp.ua"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-fit inline-flex dark:text-custom-gray hover:text-custom-orange dark:hover:text-custom-orange transition-colors items-center"
+            >
+              <i class="fas fa-envelope mr-2 text-custom-orange" />
+              it@starkon.pp.ua
+            </NuxtLink>
+
+            <NuxtLink
+              to="tel:+380954664190"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-fit inline-flex dark:text-custom-gray hover:text-custom-orange dark:hover:text-custom-orange transition-colors items-center"
+            >
+              <i class="fas fa-phone mr-2 text-custom-orange" />
+              +38 (095) 466-41-90
+            </NuxtLink>
+          </div>
+          <div class="flex space-x-6 mt-6">
             <NuxtLink
               to="viber://chat?number=%2B380954664190"
               target="_blank"
               rel="noopener noreferrer"
-              class="dark:text-custom-gray hover:text-custom-orange transition-colors"
+              class="dark:text-custom-gray hover:text-custom-orange dark:hover:text-custom-orange transition-colors"
             >
               <i class="fab fa-viber text-2xl" />
             </NuxtLink>
@@ -52,7 +66,7 @@
               to="https://t.me/+380954664190"
               target="_blank"
               rel="noopener noreferrer"
-              class="dark:text-custom-gray hover:text-custom-orange transition-colors"
+              class="dark:text-custom-gray hover:text-custom-orange dark:hover:text-custom-orange transition-colors"
             >
               <i class="fab fa-telegram text-2xl" />
             </NuxtLink>
@@ -60,7 +74,7 @@
               to="https://wa.me/380954664190"
               target="_blank"
               rel="noopener noreferrer"
-              class="dark:text-custom-gray hover:text-custom-orange transition-colors"
+              class="dark:text-custom-gray hover:text-custom-orange dark:hover:text-custom-orange transition-colors"
             >
               <i class="fab fa-whatsapp text-2xl" />
             </NuxtLink>
@@ -68,7 +82,7 @@
               to="https://m.me/380954664190"
               target="_blank"
               rel="noopener noreferrer"
-              class="dark:text-custom-gray hover:text-custom-orange transition-colors"
+              class="dark:text-custom-gray hover:text-custom-orange dark:hover:text-custom-orange transition-colors"
             >
               <i class="fab fa-facebook-messenger text-2xl" />
             </NuxtLink>
@@ -81,7 +95,11 @@
       </div>
 
       <div class="text-center mt-8 pt-8 border-t border-custom-border">
-        <NuxtLink class="dark:text-custom-gray hover:underline" to="https://it.starkon.pp.ua" target="_blank">
+        <NuxtLink
+          class="dark:text-custom-gray hover:underline dark:hover:text-custom-orange hover:text-custom-orange"
+          to="https://it.starkon.pp.ua"
+          target="_blank"
+        >
           {{ $t('Footer.developer') }}<br />
           {{ $t('Footer.copyright') }}
         </NuxtLink>

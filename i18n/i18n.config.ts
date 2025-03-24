@@ -323,7 +323,7 @@ export default defineI18nConfig(() => ({
         terms: 'Умови використання',
         policy: 'Політика конфіденційності',
         howToHelp: 'Як допомогти',
-        developer: 'Розроблено Олександром Мелешко',
+        developer: 'Розробник Олександр Мелешко',
         copyright: '© 2025. Всі права захищено.',
       },
       DonationServiceTerms: {

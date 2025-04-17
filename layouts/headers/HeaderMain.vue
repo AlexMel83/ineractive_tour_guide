@@ -1,5 +1,7 @@
 <template>
-  <div class="header-main text-white bg-[var(--header-bg)] sticky top-0 z-50">
+  <div
+    class="w-full px-4 py-2 bg-white dark:bg-gray-900 font-inter text-gray-900 dark:text-gray-200 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50"
+  >
     <div class="header-wrapper">
       <!-- Используем flex с равномерным распределением -->
       <div
@@ -8,11 +10,10 @@
         <!-- Логотип -->
         <div class="logo pl-2 cursor-pointer flex items-center space-x-2 flex-grow-0 max-w-[130px]" @click="hideMenu">
           <NuxtLink to="/" class="relative flex items-center space-x-2">
-            <div class="text-start flex flex-col text-gray-200 text-sm">
+            <div class="text-start flex flex-col text-sm">
               <div class="font-bold whitespace-normal">
                 {{ $t('header.title') }}
               </div>
-              <!-- <span class="truncate">{{ $t('header.subtitle') }}</span> -->
             </div>
           </NuxtLink>
         </div>

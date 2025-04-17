@@ -10,7 +10,13 @@
       <section class="tour-list" :class="{ blurred: appStore.isMenuOpen }">
         <MapContainer :panoramas="filteredPanoramas || []" />
         <div v-auto-animate class="tour-wrapper">
-          <Panoramas :panoramas="filteredPanoramas" :is-loading="isLoading" :search-term="searchTerm" />
+          <Panoramas
+            :panoramas="filteredPanoramas"
+            :is-loading="isLoading"
+            :search-term="searchTerm"
+            :center="{ lat: 49.7548762, lng: 27.1951962 }"
+            :radius="100"
+          />
         </div>
       </section>
     </main>

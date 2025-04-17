@@ -34,7 +34,7 @@ export default defineNuxtConfig({
     transpile: ['@nuxt/ui'], // if using Nuxt UI
   },
   devtools: { enabled: false },
-  css: [  'leaflet.markercluster/dist/MarkerCluster.css','leaflet.markercluster/dist/MarkerCluster.Default.css','~/assets/src/tailwind.css', '~/assets/src/styles.css'],
+  css: [  'leaflet.markercluster/dist/MarkerCluster.css','leaflet.markercluster/dist/MarkerCluster.Default.css','@fortawesome/fontawesome-free/css/all.min.css','~/assets/src/tailwind.css', '~/assets/src/styles.css'],
   modules: [
     '@nuxt/ui',
     '@formkit/auto-animate/nuxt',

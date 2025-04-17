@@ -129,6 +129,14 @@ const props = defineProps({
     type: String,
     default: '',
   },
+  center: {
+    type: Object,
+    default: () => ({ lat: 49.7548762, lng: 27.1951962 }), // Центр области 49.7548762, 27.1951962
+  },
+  radius: {
+    type: Number,
+    default: 10, // Радиус в километрах
+  },
 });
 
 const currentPage = ref(1);
@@ -143,12 +151,44 @@ const formatDate = (dateString) => {
   return new Date(dateString).toLocaleString('ru-RU', options);
 };
 
+const haversineDistance = (lat1, lng1, lat2, lng2) => {
+  const R = 6371; // Радиус Земли в километрах
+  const toRad = (value) => (value * Math.PI) / 180;
+
+  const dLat = toRad(lat2 - lat1);
+  const dLng = toRad(lng2 - lng1);
+
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLng / 2) * Math.sin(dLng / 2);
+
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return R * c; // Расстояние в километрах
+};
+
 const filteredPanoramas = computed(() => {
   const lowerCaseSearchTerm = props.searchTerm.toLowerCase();
   const startIndex = (currentPage.value - 1) * perPage.value;
   const endIndex = startIndex + perPage.value;
   return props.panoramas
-    .filter((panorama) => panorama.title.toLowerCase().includes(lowerCaseSearchTerm))
+    .filter((panorama) => {
+      // Фильтрация по поисковому запросу
+      const matchesSearch = panorama.title.toLowerCase().includes(lowerCaseSearchTerm);
+
+      // Фильтрация по координатам
+      if (!panorama.latitude || !panorama.longitude) {
+        return matchesSearch; // Если координаты отсутствуют, учитываем только поиск
+      }
+
+      const distance = haversineDistance(
+        parseFloat(props.center.lat),
+        parseFloat(props.center.lng),
+        parseFloat(panorama.latitude),
+        parseFloat(panorama.longitude),
+      );
+
+      return matchesSearch && distance <= props.radius;
+    })
     .slice(startIndex, endIndex);
 });
 

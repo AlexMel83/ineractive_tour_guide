@@ -10,8 +10,8 @@
   >
     <MapExpandButton
       :is-full-screen="fullScreen"
-      @update:is-full-screen="fullScreen = $event"
       :map-ref="map?.leafletObject ? map : null"
+      @update:is-full-screen="fullScreen = $event"
     />
     <MapGeoError v-if="geoError" :error-message="geoErrorMsg" @close="closeGeoError" />
     <map-features
@@ -35,7 +35,7 @@
       :fade-animation="false"
       :center="MAP_CONFIG.CENTER"
       :zoom="MAP_CONFIG.ZOOM"
-      :preferCanvas="true"
+      :prefer-canvas="true"
       @ready="onMapReady"
     >
       <l-control-layers position="bottomleft" :collapsed="true" />

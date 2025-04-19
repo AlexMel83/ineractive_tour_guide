@@ -209,6 +209,8 @@ const toggleSearch = () => {
   .header-main.home-page {
     background-image: url('~/assets/header_bg.png');
     background-size: cover;
+    background-loading: lazy;
+    content-visibility: auto;
   }
   .header-main.home-page .header-text {
     display: block;

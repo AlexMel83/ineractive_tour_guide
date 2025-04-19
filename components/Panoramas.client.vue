@@ -22,7 +22,12 @@
                 loading="lazy"
                 :alt="panorama.title"
               />
-              <img v-else :src="isDocker ? 'default-image.jpg' : './../public/' + 'default-image.jpg'" />
+              <img
+                v-else
+                :src="isDocker ? 'default-image.jpg' : './../public/' + 'default-image.jpg'"
+                loading="lazy"
+                :alt="$t('Panoramas.defaultImageAlt')"
+              />
               <div class="title">
                 <h2 class="text-sm md:text-base lg:text-lg">
                   {{ panorama.title }}

@@ -1,6 +1,6 @@
 <template>
   <UButton
-    class="accordion-button mb-2 dark:text-gray-900 hover:bg-primary-600 dark:hover:bg-primary-500 absolute top-2 right-2 z-[1000] px-2 py-1 rounded shadow-md w-auto max-w-[95px] whitespace-normal sm:max-w-full sm:px-1 sm:text-base text-sm text-left mt-12 xs:mt-0"
+    class="accordion-button mb-2 dark:text-gray-900 hover:bg-primary-600 dark:hover:bg-primary-500 absolute top-2 right-2 z-[2] px-2 py-1 rounded shadow-md w-auto max-w-[95px] whitespace-normal sm:max-w-full sm:px-1 sm:text-base text-sm text-left mt-0 xs:mt-0"
     @click="toggleFullScreen"
   >
     {{ isFullScreen ? $t('Map.collapseMap') : $t('Map.expandMap') }}

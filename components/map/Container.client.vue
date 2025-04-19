@@ -1,14 +1,18 @@
 <template>
   <section
     v-if="panoramas.length > 0"
-    :class="['mapsection relative', fullScreen ? 'fixed inset-0 w-full h-screen z-[1000]' : 'h-96']"
+    :class="['mapsection relative', fullScreen ? 'fixed inset-0 w-full h-screen z-[1600]' : 'h-96']"
     name="image-map"
     :style="{
       transition: 'height 300ms ease-in-out, width 300ms ease-in-out',
       position: fullScreen ? 'fixed' : 'relative',
     }"
   >
-    <MapExpandButton v-model:is-full-screen="fullScreen" :map-ref="map?.leafletObject ? map : null" />
+    <MapExpandButton
+      :is-full-screen="fullScreen"
+      @update:is-full-screen="fullScreen = $event"
+      :map-ref="map?.leafletObject ? map : null"
+    />
     <MapGeoError v-if="geoError" :error-message="geoErrorMsg" @close="closeGeoError" />
     <map-features
       :search-results="searchResults"
@@ -31,6 +35,7 @@
       :fade-animation="false"
       :center="MAP_CONFIG.CENTER"
       :zoom="MAP_CONFIG.ZOOM"
+      :preferCanvas="true"
       @ready="onMapReady"
     >
       <l-control-layers position="bottomleft" :collapsed="true" />
@@ -46,6 +51,8 @@
         :name="tileProvider.name"
         :url="tileProvider.url"
         layer-type="base"
+        :loading-attribute="'lazy'"
+        :use-cache="true"
       />
       <MapPanoramaMarkers
         :panoramas="panoramas"

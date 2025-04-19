@@ -4,13 +4,13 @@
       <div class="contacts flex items-center justify-between gap-4 mb-2">
         <a href="https://maps.app.goo.gl/TV82VnCCFqWFcaM2A" target="_blank">
           <div class="address hover:scale-105 flex items-center gap-2">
-            <img width="18" height="18" src="~assets/icon_location.png" alt="icon" />
+            <img width="18" height="18" src="~assets/icon_location.png" alt="icon" loading="lazy" />
             {{ $t('Footer.address') }}
           </div>
         </a>
         <a href="tel:+380954664190">
           <div class="phone hover:scale-105 flex items-center gap-2">
-            <img width="18" height="18" src="~assets/icon_phone.png" alt="icon" />
+            <img width="18" height="18" src="~assets/icon_phone.png" alt="icon" loading="lazy" />
             +38 095 466-41-90
           </div>
         </a>
@@ -18,16 +18,16 @@
       {{ $t('Footer.social') }}
       <div class="social-media flex justify-around w-full mt-3">
         <a href="https://www.facebook.com/cfhopeua" target="_blank" class="social">
-          <img width="32" height="32" src="/icons/facebook.png" alt="icon" />
+          <img width="32" height="32" src="/icons/facebook.png" alt="icon" loading="lazy" />
         </a>
         <a href="https://t.me/cfhopeua" target="_blank" class="social">
-          <img width="32" height="32" src="/icons/telegram.png" alt="icon" />
+          <img width="32" height="32" src="/icons/telegram.png" alt="icon" loading="lazy" />
         </a>
         <a href="viber://chat?number=+380987654321" target="_blank" class="social">
-          <img width="32" height="32" src="/icons/viber.png" alt="icon" />
+          <img width="32" height="32" src="/icons/viber.png" alt="icon" loading="lazy" />
         </a>
         <a href="https://www.instagram.com/cfhopeua/" target="_blank" class="social">
-          <img width="32" height="32" src="/icons/instagram.png" alt="icon" />
+          <img width="32" height="32" src="/icons/instagram.png" alt="icon" loading="lazy" />
         </a>
       </div>
       <div class="flex items-center justify-between gap-4 my-3">
@@ -55,6 +55,7 @@
               width="48"
               height="48"
               class="relative h-auto object-contain"
+              loading="lazy"
             />
           </div>
           <p class="ml-3">{{ $t('Footer.developer') }}<br />it.starkon.pp.ua<br />{{ $t('Footer.copyright') }}</p>

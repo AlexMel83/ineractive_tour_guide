@@ -15,7 +15,7 @@ export default defineNuxtPlugin((nuxtApp) => {
       };
 
       const script = document.createElement('script');
-      script.src = `https://maps.googleapis.com/maps/api/js?key=${googleMapsApiKey}&callback=initGoogleMaps&libraries=places&v=beta&loading=async`;
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${googleMapsApiKey}&callback=initGoogleMaps&libraries=places&v=beta&loading=async&render=lazy`;
       script.async = true;
       script.defer = true;
       script.onerror = reject;

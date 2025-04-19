@@ -61,7 +61,7 @@ const createPanoramaPopupContent = (panorama) => {
       </a>
       ${address}
       <a href="/panoramas/${panorama.id}">
-        <img src="${photoURL}" alt="${panorama.title}" style="max-width: 100%; display: block;" />
+        <img src="${photoURL}" alt="${panorama.title}" style="max-width: 100%; display: block;" loading="lazy" />
       </a>
     </div>`;
 };

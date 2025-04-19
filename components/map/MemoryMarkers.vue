@@ -64,11 +64,11 @@ const createMemoryPopupContent = (memory) => {
   // Определение превью изображения или видео
   let previewImage = '';
   if (memory.source_type === 'youtube' && memory.source_url) {
-    previewImage = `<img src="${getYoutubeThumbnailUrl(memory.source_url)}" alt="${memory.title}" style="max-width: 100%; display: block;" />`;
+    previewImage = `<img src="${getYoutubeThumbnailUrl(memory.source_url)}" alt="${memory.title}" style="max-width: 100%; display: block;" loading="lazy" />`;
   } else if (memory.source_type === 'facebook' && memory.source_url) {
     previewImage = `<iframe width="100%" src="https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(memory.source_url)}&show_text=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
   } else {
-    previewImage = `<img src="${photoURL}" alt="${memory.title}" style="max-width: 100%; display: block;" />`;
+    previewImage = `<img src="${photoURL}" alt="${memory.title}" style="max-width: 100%; display: block;" loading="lazy" />`;
   }
 
   return `

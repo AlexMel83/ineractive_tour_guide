@@ -74,7 +74,7 @@
       <div class="flex justify-center pagination">
         <UPagination
           v-model="currentPage"
-          :total="panoramas.length"
+          :total="filteredList.length"
           :page-count="perPage"
           size="md"
           :ui="{
@@ -171,30 +171,29 @@ const haversineDistance = (lat1, lng1, lat2, lng2) => {
   return R * c; // Расстояние в километрах
 };
 
-const filteredPanoramas = computed(() => {
+const filteredList = computed(() => {
   const lowerCaseSearchTerm = props.searchTerm.toLowerCase();
+
+  return props.panoramas.filter((panorama) => {
+    const matchesSearch = panorama.title.toLowerCase().includes(lowerCaseSearchTerm);
+
+    if (!panorama.latitude || !panorama.longitude) return matchesSearch;
+
+    const distance = haversineDistance(
+      parseFloat(props.center.lat),
+      parseFloat(props.center.lng),
+      parseFloat(panorama.latitude),
+      parseFloat(panorama.longitude),
+    );
+
+    return matchesSearch && distance <= props.radius;
+  });
+});
+
+const filteredPanoramas = computed(() => {
   const startIndex = (currentPage.value - 1) * perPage.value;
   const endIndex = startIndex + perPage.value;
-  return props.panoramas
-    .filter((panorama) => {
-      // Фильтрация по поисковому запросу
-      const matchesSearch = panorama.title.toLowerCase().includes(lowerCaseSearchTerm);
-
-      // Фильтрация по координатам
-      if (!panorama.latitude || !panorama.longitude) {
-        return matchesSearch; // Если координаты отсутствуют, учитываем только поиск
-      }
-
-      const distance = haversineDistance(
-        parseFloat(props.center.lat),
-        parseFloat(props.center.lng),
-        parseFloat(panorama.latitude),
-        parseFloat(panorama.longitude),
-      );
-
-      return matchesSearch && distance <= props.radius;
-    })
-    .slice(startIndex, endIndex);
+  return filteredList.value.slice(startIndex, endIndex);
 });
 
 const getThumbnailUrl = (thumbnailUrl) => {
@@ -207,6 +206,12 @@ const toggleAccordion = () => {
 
 const isFirstPage = computed(() => currentPage.value === 1);
 const isLastPage = computed(() => currentPage.value === Math.ceil(props.panoramas.length / perPage.value));
+
+watch(filteredList, () => {
+  if ((currentPage.value - 1) * perPage.value >= filteredList.value.length) {
+    currentPage.value = 1;
+  }
+});
 </script>
 
 <style scoped>
